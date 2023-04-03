@@ -1,0 +1,56 @@
+<?php
+
+namespace Database\Seeders;
+
+use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ItemsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $user_id =
+            DB::table('users')
+                ->where('email', 'test_email@email.com')
+                ->value('id');
+        $folder =
+            DB::table('folders')
+                ->where('user_id', $user_id)
+                ->first();
+
+        $names = [];
+        for ($i = 1; $i <= 40; $i++) {
+            $names[] = "アニメ{$i}";
+        }
+        foreach ($names as $name) {
+            DB::table('items')->insert([
+                'name' => $name,
+                'folder_id' => $folder->id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        $user_id =
+            DB::table('users')
+                ->where('email', 'test@email.com')
+                ->value('id');
+        $folder =
+            DB::table('folders')
+                ->where('user_id', $user_id)
+                ->first();
+
+        DB::table('items')->insert([
+            'name' => 'test',
+            'folder_id' => $folder->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+}
