@@ -73,7 +73,7 @@ const AddItem = ({ folderId, handleReload }) => {
         const abortCtrl = new AbortController()
         const timeout = setTimeout(() => { abortCtrl.abort() }, 10000);
         axios
-            .post(`/api/folders/${folderId}/items`, { name: value.trim() }, { signal: abortCtrl.signal })
+            .post(`/api/folders/${folderId}/items`, { name: nameValue.trim(), memo: memoValue }, { signal: abortCtrl.signal })
             .then(() => {
                 ApiAfterAction("アニメの作成が完了しました");
             })
@@ -88,7 +88,7 @@ const AddItem = ({ folderId, handleReload }) => {
     return (
         <Box>
             <AddIconButton
-                    task_name="新しいアニメの作成"
+                    taskName="新しいアニメの作成"
                     id="new_item_name"
                     label="新しいアニメ名"
                     open={ open }
