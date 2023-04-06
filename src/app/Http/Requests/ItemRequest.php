@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @property string name
+ * @property string memo
  */
 class ItemRequest extends FormRequest
 {
@@ -28,6 +29,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'name' => 'required|max:200',
+            'memo' => 'string|nullable',
         ];
     }
 }
