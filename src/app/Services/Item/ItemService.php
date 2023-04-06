@@ -3,6 +3,7 @@
 namespace App\Services\Item;
 
 use App\Models\Folder;
+use App\Models\Item;
 
 class ItemService
 {
@@ -30,5 +31,23 @@ class ItemService
                 break;
         }
         return $items;
+    }
+
+    public function createItemRecord(Folder $folder, string $name, ?string $memo): \App\Models\Item
+    {
+        $item = new Item();
+        $item->folder_id = $folder->id;
+        $item->name = trim($name);
+        $item->memo = $memo;
+        $item->save();
+        return $item;
+    }
+
+    public function updateItemRecord(Item $item, string $name, ?string $memo): \App\Models\Item
+    {
+        $item->name = trim($name);
+        $item->memo = $memo;
+        $item->save();
+        return $item;
     }
 }

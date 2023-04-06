@@ -16123,6 +16123,26 @@
                         /** @var \App\Services\Item\ItemService $instance */
                         return $instance->getItemsByFolder($folder, $sortType, $perPage);
         }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function createItemRecord($folder, $name, $memo)
+        {
+                        /** @var \App\Services\Item\ItemService $instance */
+                        return $instance->createItemRecord($folder, $name, $memo);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function updateItemRecord($item, $name, $memo)
+        {
+                        /** @var \App\Services\Item\ItemService $instance */
+                        return $instance->updateItemRecord($item, $name, $memo);
+        }
          
     }
      

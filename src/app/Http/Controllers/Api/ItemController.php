@@ -25,9 +25,7 @@ class ItemController extends Controller
 
     public function create(Folder $folder, ItemRequest $request): \Illuminate\Http\JsonResponse
     {
-        $item = new Item();
-        $item->name = trim($request->name);
-        $folder->items()->save($item);
+        \ItemService::createItemRecord($folder, $request->name, $request->memo);
         return response()->json([], 200);
     }
 
@@ -47,8 +45,7 @@ class ItemController extends Controller
             return response()->json([], 403);
         }
 
-        $item->name = trim($request->name);
-        $item->save();
+        \ItemService::updateItemRecord($item, $request->name, $request->memo);
         return response()->json([], 200);
     }
 
