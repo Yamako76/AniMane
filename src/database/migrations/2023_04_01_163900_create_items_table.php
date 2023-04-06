@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('folder_id');
             $table->string('name', 200);
+            $table->text('memo')->nullable();
             $table->timestamps();
             $table->foreign('folder_id')->references('id')->on('folders')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
