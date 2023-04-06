@@ -16,7 +16,7 @@ class FoldersTableSeeder extends Seeder
     public function run()
     {
         $names = ['アクション', 'コメディ', 'ホラー'];
-        $user_id =
+        $userId =
             DB::table('users')
                 ->where('email', 'test_email@email.com')
                 ->value('id');
@@ -24,20 +24,20 @@ class FoldersTableSeeder extends Seeder
         foreach ($names as $name) {
             DB::table('folders')->insert([
                 'name' => $name,
-                'user_id' => $user_id,
+                'user_id' => $userId,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
         }
 
-        $user_id =
+        $userId =
             DB::table('users')
                 ->where('email', 'test@email.com')
                 ->value('id');
 
         DB::table('folders')->insert([
             'name' => 'test',
-            'user_id' => $user_id,
+            'user_id' => $userId,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

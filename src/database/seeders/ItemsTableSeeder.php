@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Folder;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +16,15 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        $user_id =
+        $userId =
             DB::table('users')
                 ->where('email', 'test_email@email.com')
                 ->value('id');
+
+        /** @var Folder $folder */
         $folder =
             DB::table('folders')
-                ->where('user_id', $user_id)
+                ->where('user_id', $userId)
                 ->first();
 
         $names = [];
@@ -32,23 +35,27 @@ class ItemsTableSeeder extends Seeder
             DB::table('items')->insert([
                 'name' => $name,
                 'folder_id' => $folder->id,
+                'memo' => 'memo',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
         }
 
-        $user_id =
+        $userId =
             DB::table('users')
                 ->where('email', 'test@email.com')
                 ->value('id');
+
+        /** @var Folder $folder */
         $folder =
             DB::table('folders')
-                ->where('user_id', $user_id)
+                ->where('user_id', $userId)
                 ->first();
 
         DB::table('items')->insert([
             'name' => 'test',
             'folder_id' => $folder->id,
+            'memo' => 'memo',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
