@@ -34584,13 +34584,18 @@ var AddItem = function AddItem(_ref) {
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      value = _useState6[0],
-      setValue = _useState6[1];
+      nameValue = _useState6[0],
+      setNameValue = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      errorText = _useState8[0],
-      setErrorText = _useState8[1];
+      memoValue = _useState8[0],
+      setMemoValue = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      errorText = _useState10[0],
+      setErrorText = _useState10[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_common_Notification__WEBPACK_IMPORTED_MODULE_2__.NoticeContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -34610,9 +34615,16 @@ var AddItem = function AddItem(_ref) {
   };
 
   var handleRefresh = function handleRefresh() {
-    setValue("");
+    setNameValue("");
     handleErrorRefresh();
   };
+
+  var itemHandleRefresh = function itemHandleRefresh() {
+    setMemoValue("");
+    handleErrorRefresh();
+  };
+
+  setMemoValue("");
 
   var handleClickOpen = function handleClickOpen() {
     setOpen(true);
@@ -34625,7 +34637,7 @@ var AddItem = function AddItem(_ref) {
   };
 
   var handleChange = function handleChange(e) {
-    setValue(e.target.value);
+    setNameValue(e.target.value);
 
     if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(e.target.value)) {
       handleErrorRefresh();
@@ -34634,8 +34646,12 @@ var AddItem = function AddItem(_ref) {
     }
   };
 
+  var itemHandleChange = function itemHandleChange(e) {
+    setMemoValue(e.target.value);
+  };
+
   var handleSubmit = function handleSubmit() {
-    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(value)) {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(nameValue)) {
       createItem();
       handleClose();
     } else {
@@ -34661,7 +34677,8 @@ var AddItem = function AddItem(_ref) {
       abortCtrl.abort();
     }, 10000);
     axios__WEBPACK_IMPORTED_MODULE_3___default().post("/api/folders/".concat(folderId, "/items"), {
-      name: value.trim()
+      name: nameValue.trim(),
+      memo: memoValue
     }, {
       signal: abortCtrl.signal
     }).then(function () {
@@ -34675,8 +34692,8 @@ var AddItem = function AddItem(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_common_AddIconButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      task_name: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u306E\u4F5C\u6210",
-      id: "new_item_name",
+      taskName: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u306E\u4F5C\u6210",
+      id: "newItemName",
       label: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u540D",
       open: open,
       error: error,
@@ -34686,8 +34703,14 @@ var AddItem = function AddItem(_ref) {
       handleClose: handleClose,
       handleSubmit: handleSubmit,
       handleRefresh: handleRefresh,
-      value: value,
-      submit_button_name: "\u8FFD\u52A0"
+      value: nameValue,
+      submitButtonName: "\u8FFD\u52A0",
+      memoLabel: "\u65B0\u3057\u3044\u30E1\u30E2\u540D",
+      memoName: "\u65B0\u3057\u3044\u30E1\u30E2\u306E\u4F5C\u6210",
+      memoValue: memoValue,
+      memoId: "newMemoName",
+      itemHandleChange: itemHandleChange,
+      itemHandleRefresh: itemHandleRefresh
     })
   });
 };
@@ -34947,7 +34970,8 @@ var EditItem = function EditItem(_ref) {
       abortCtrl.abort();
     }, 10000);
     axios__WEBPACK_IMPORTED_MODULE_3___default().put("/api/folders/".concat(folderId, "/items/").concat(item.id), {
-      name: value.trim()
+      name: nameValue.trim(),
+      memo: memoValue
     }, {
       signal: abortCtrl.signal
     }).then(function () {
@@ -36640,7 +36664,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/IconButton.js");
 /* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
 /* harmony import */ var _mui_icons_material_Add__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/icons-material/Add */ "./node_modules/@mui/icons-material/Add.js");
-/* harmony import */ var _EditDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditDialog */ "./resources/js/components/common/EditDialog.js");
+/* harmony import */ var _EditItemDialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditItemDialog */ "./resources/js/components/common/EditItemDialog.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -36655,7 +36679,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AddIconButton = function AddIconButton(_ref) {
-  var task_name = _ref.task_name,
+  var taskName = _ref.taskName,
       id = _ref.id,
       label = _ref.label,
       open = _ref.open,
@@ -36667,19 +36691,25 @@ var AddIconButton = function AddIconButton(_ref) {
       handleSubmit = _ref.handleSubmit,
       handleRefresh = _ref.handleRefresh,
       value = _ref.value,
-      submit_button_name = _ref.submit_button_name,
-      sx = _ref.sx;
+      submitButtonName = _ref.submitButtonName,
+      sx = _ref.sx,
+      memoName = _ref.memoName,
+      memoId = _ref.memoId,
+      memoLabel = _ref.memoLabel,
+      memoValue = _ref.memoValue,
+      itemHandleChange = _ref.itemHandleChange,
+      itemHandleRefresh = _ref.itemHandleRefresh;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      title: task_name,
+      title: taskName,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         onClick: handleClickOpen,
         disableFocusRipple: true,
         sx: sx,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_icons_material_Add__WEBPACK_IMPORTED_MODULE_6__["default"], {})
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_EditDialog__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      task_name: task_name,
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_EditItemDialog__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      taskName: taskName,
       id: id,
       label: label,
       open: open,
@@ -36690,7 +36720,13 @@ var AddIconButton = function AddIconButton(_ref) {
       handleSubmit: handleSubmit,
       handleRefresh: handleRefresh,
       value: value,
-      submit_button_name: submit_button_name
+      submitButtonName: submitButtonName,
+      memoName: memoName,
+      memoLabel: memoLabel,
+      memoValue: memoValue,
+      memoId: memoId,
+      itemHandleChange: itemHandleChange,
+      itemHandleRefresh: itemHandleRefresh
     })]
   });
 };
@@ -37020,7 +37056,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var EditDialog = function EditDialog(_ref) {
-  var task_name = _ref.task_name,
+  var taskName = _ref.taskName,
       id = _ref.id,
       label = _ref.label,
       open = _ref.open,
@@ -37037,7 +37073,7 @@ var EditDialog = function EditDialog(_ref) {
       open: open,
       onClose: handleClose,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        children: task_name
+        children: taskName
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
           autoFocus: true,
@@ -37075,6 +37111,136 @@ var EditDialog = function EditDialog(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditDialog);
+
+/***/ }),
+
+/***/ "./resources/js/components/common/EditItemDialog.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/common/EditItemDialog.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
+/* harmony import */ var _mui_material_DialogActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/DialogActions */ "./node_modules/@mui/material/DialogActions/DialogActions.js");
+/* harmony import */ var _mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/DialogContent */ "./node_modules/@mui/material/DialogContent/DialogContent.js");
+/* harmony import */ var _mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/DialogTitle */ "./node_modules/@mui/material/DialogTitle/DialogTitle.js");
+/* harmony import */ var _ClearButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClearButton */ "./resources/js/components/common/ClearButton.js");
+/* harmony import */ var _tool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+ // Objectの追加・編集する画面
+// Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
+// 閉じるまたは追加・編集ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
+// @task_name: 実行するtask  (例: 新しいフォルダの作成)
+// @submit_button_name: objectの追加・編集の完了するボタンの名前  (例: 追加)
+
+
+
+
+var EditItemDialog = function EditItemDialog(_ref) {
+  var taskName = _ref.taskName,
+      id = _ref.id,
+      label = _ref.label,
+      open = _ref.open,
+      error = _ref.error,
+      errorText = _ref.errorText,
+      handleChange = _ref.handleChange,
+      handleClose = _ref.handleClose,
+      handleSubmit = _ref.handleSubmit,
+      handleRefresh = _ref.handleRefresh,
+      value = _ref.value,
+      submitButtonName = _ref.submitButtonName,
+      memoName = _ref.memoName,
+      memoId = _ref.memoId,
+      memoLabel = _ref.memoLabel,
+      memoValue = _ref.memoValue,
+      itemHandleChange = _ref.itemHandleChange,
+      itemHandleRefresh = _ref.itemHandleRefresh;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      open: open,
+      onClose: handleClose,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: taskName
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          autoFocus: true,
+          margin: "dense",
+          id: id,
+          label: label,
+          fullWidth: true,
+          variant: "outlined",
+          helperText: errorText,
+          error: error,
+          onChange: handleChange // onKeyDown={(e) => {
+          //     pressEnter(e, handleSubmit);
+          // }}
+          ,
+          value: value,
+          InputProps: {
+            endAdornment: value === "" ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ClearButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              title: "\u5165\u529B\u306E\u30AF\u30EA\u30A2",
+              handleRefresh: handleRefresh,
+              fontSize: "small"
+            })
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: memoName
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          autoFocus: true,
+          margin: "dense",
+          id: memoId,
+          label: memoLabel,
+          fullWidth: true,
+          variant: "outlined",
+          helperText: errorText,
+          error: error,
+          onChange: itemHandleChange // onKeyDown={(e) => {
+          //     pressEnter(e, handleSubmit);
+          // }}
+          ,
+          value: memoValue,
+          InputProps: {
+            endAdornment: memoValue === "" ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ClearButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              title: "\u5165\u529B\u306E\u30AF\u30EA\u30A2",
+              handleRefresh: itemHandleRefresh,
+              fontSize: "small"
+            })
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_DialogActions__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          onClick: handleClose,
+          children: "\u9589\u3058\u308B"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          onClick: handleSubmit,
+          children: submitButtonName
+        })]
+      })]
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditItemDialog);
 
 /***/ }),
 
