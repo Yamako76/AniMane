@@ -37,7 +37,7 @@ const AddItem = ({folderId, handleReload}) => {
         setMemoValue("");
         handleErrorRefresh();
     }
-    setMemoValue("");
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
