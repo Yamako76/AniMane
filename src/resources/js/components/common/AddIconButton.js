@@ -20,15 +20,14 @@ const AddIconButton = ({
                            handleClose,
                            handleSubmit,
                            handleRefresh,
-                           value,
+                           nameValue,
                            submitButtonName,
                            sx,
-                           memoName,
                            memoId,
                            memoLabel,
                            memoValue,
-                           itemHandleChange,
-                           itemHandleRefresh
+                           memoHandleChange,
+                           memoHandleRefresh
                        }) => {
     return (
         <Box>
@@ -53,14 +52,13 @@ const AddIconButton = ({
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
                 handleRefresh={handleRefresh}
-                value={value}
+                nameValue={nameValue}
                 submitButtonName={submitButtonName}
-                memoName={memoName}
                 memoLabel={memoLabel}
                 memoValue={memoValue}
                 memoId={memoId}
-                itemHandleChange={itemHandleChange}
-                itemHandleRefresh={itemHandleRefresh}
+                memoHandleChange={memoHandleChange}
+                memoHandleRefresh={memoHandleRefresh}
             />
         </Box>
     );

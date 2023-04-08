@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Box from '@mui/material/Box';
 import AddIconButton from '../../common/AddIconButton';
 import {NoticeContext} from '../../common/Notification';
@@ -33,11 +33,10 @@ const AddItem = ({folderId, handleReload}) => {
         handleErrorRefresh();
     }
 
-    const itemHandleRefresh = () => {
+    const memoHandleRefresh = () => {
         setMemoValue("");
-        handleErrorRefresh();
     }
-    
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -45,6 +44,7 @@ const AddItem = ({folderId, handleReload}) => {
     const handleClose = () => {
         setOpen(false);
         handleRefresh();
+        memoHandleRefresh();
         handleErrorRefresh();
     };
 
@@ -57,7 +57,7 @@ const AddItem = ({folderId, handleReload}) => {
         }
     };
 
-    const itemHandleChange = (e) => {
+    const memoHandleChange = (e) => {
         setMemoValue(e.target.value);
     };
 
@@ -98,31 +98,28 @@ const AddItem = ({folderId, handleReload}) => {
             })
     }
 
-    return (
-        <Box>
-            <AddIconButton
-                taskName="新しいアニメの作成"
-                id="newItemName"
-                label="新しいアニメ名"
-                open={open}
-                error={error}
-                errorText={errorText}
-                handleClickOpen={handleClickOpen}
-                handleChange={handleChange}
-                handleClose={handleClose}
-                handleSubmit={handleSubmit}
-                handleRefresh={handleRefresh}
-                value={nameValue}
-                submitButtonName="追加"
-                memoLabel="新しいメモ名"
-                memoName="新しいメモの作成"
-                memoValue={memoValue}
-                memoId="newMemoName"
-                itemHandleChange={itemHandleChange}
-                itemHandleRefresh={itemHandleRefresh}
-            />
-        </Box>
-    );
+    return (<Box>
+        <AddIconButton
+            taskName="新しいアニメの作成"
+            id="newItemName"
+            label="新しいアニメ名"
+            open={open}
+            error={error}
+            errorText={errorText}
+            handleClickOpen={handleClickOpen}
+            handleChange={handleChange}
+            handleClose={handleClose}
+            handleSubmit={handleSubmit}
+            handleRefresh={handleRefresh}
+            nameValue={nameValue}
+            submitButtonName="追加"
+            memoId="newMemoName"
+            memoLabel="新しいメモ名"
+            memoValue={memoValue}
+            memoHandleChange={memoHandleChange}
+            memoHandleRefresh={memoHandleRefresh}
+        />
+    </Box>);
 }
 
 export default AddItem;

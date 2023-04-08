@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import Box from '@mui/material/Box';
-import EditButton from '../../common/EditButton';
+import EditItemButton from '../../common/EditItemButton';
 import {NoticeContext} from '../../common/Notification';
 import axios from 'axios';
 import {value_validation} from '../../common/tool';
@@ -12,7 +12,8 @@ import {value_validation} from '../../common/tool';
 const EditItem = ({folderId, item, handleReload}) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
-    const [value, setValue] = useState("");
+    const [nameValue, setNameValue] = useState("");
+    const [memoValue, setMemoValue] = useState("");
     const [errorText, setErrorText] = useState();
     const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
@@ -28,8 +29,12 @@ const EditItem = ({folderId, item, handleReload}) => {
     }
 
     const handleRefresh = () => {
-        setValue("");
+        setNameValue("");
         handleErrorRefresh();
+    }
+
+    const memoHandleRefresh = () => {
+        setMemoValue("");
     }
 
     const handleClickOpen = () => {
@@ -39,11 +44,12 @@ const EditItem = ({folderId, item, handleReload}) => {
     const handleClose = () => {
         setOpen(false);
         handleRefresh();
+        memoHandleRefresh();
         handleErrorRefresh();
     };
 
     const handleChange = (e) => {
-        setValue(e.target.value);
+        setNameValue(e.target.value);
         if (value_validation(e.target.value)) {
             handleErrorRefresh();
         } else {
@@ -51,8 +57,12 @@ const EditItem = ({folderId, item, handleReload}) => {
         }
     };
 
+    const memoHandleChange = (e) => {
+        setMemoValue(e.target.value);
+    };
+
     const handleSubmit = () => {
-        if (value_validation(value)) {
+        if (value_validation(nameValue)) {
             updateItem();
             handleClose();
         } else {
@@ -90,8 +100,8 @@ const EditItem = ({folderId, item, handleReload}) => {
 
     return (
         <Box>
-            <EditButton
-                task_name="アニメの編集"
+            <EditItemButton
+                taskName="アニメの編集"
                 id="edit item"
                 label="新しいアニメ名"
                 open={open}
@@ -102,10 +112,15 @@ const EditItem = ({folderId, item, handleReload}) => {
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
                 handleRefresh={handleRefresh}
-                value={value}
-                submit_button_name="完了"
-                aria_label="edit_item"
+                nameValue={nameValue}
+                submitButtonName="完了"
+                ariaLabel="edit_item"
                 size="small"
+                memoId="edit memo"
+                memoLabel="新しいメモ名"
+                memoValue={memoValue}
+                memoHandleChange={memoHandleChange}
+                memoHandleRefresh={memoHandleRefresh}
             />
         </Box>
     );
