@@ -25,14 +25,13 @@ const EditItemDialog = ({
                             handleClose,
                             handleSubmit,
                             handleRefresh,
-                            value,
+                            nameValue,
                             submitButtonName,
-                            memoName,
                             memoId,
                             memoLabel,
                             memoValue,
-                            itemHandleChange,
-                            itemHandleRefresh
+                            memoHandleChange,
+                            memoHandleRefresh
 
                         }) => {
     return (
@@ -53,32 +52,24 @@ const EditItemDialog = ({
                         // onKeyDown={(e) => {
                         //     pressEnter(e, handleSubmit);
                         // }}
-                        value={value}
+                        value={nameValue}
                         InputProps={{
-                            endAdornment: (value === "") ? null :
+                            endAdornment: (nameValue === "") ? null :
                                 <ClearButton title="入力のクリア" handleRefresh={handleRefresh} fontSize="small"/>
                         }}
                     />
-                </DialogContent>
-                <DialogTitle>{memoName}</DialogTitle>
-                <DialogContent>
                     <TextField
-                        autoFocus
                         margin="dense"
                         id={memoId}
                         label={memoLabel}
                         fullWidth
                         variant="outlined"
-                        helperText={errorText}
                         error={error}
-                        onChange={itemHandleChange}
-                        // onKeyDown={(e) => {
-                        //     pressEnter(e, handleSubmit);
-                        // }}
+                        onChange={memoHandleChange}
                         value={memoValue}
                         InputProps={{
                             endAdornment: (memoValue === "") ? null :
-                                <ClearButton title="入力のクリア" handleRefresh={itemHandleRefresh} fontSize="small"/>
+                                <ClearButton title="入力のクリア" handleRefresh={memoHandleRefresh} fontSize="small"/>
                         }}
                     />
                 </DialogContent>
