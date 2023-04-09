@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import NavBar from './components/NavBar/NavBar';
 import Notification from './components/common/Notification';
 import FolderStatusManagement from './components/FolderStatusManagement/FolderStatusManagement';
+import Item from "./pages/Item";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Routes>
                     <Route path='/app/home' element={ <Home /> } />
                     <Route path='/app/home/folders/:folderId/items' element={ <Folder /> } />
+                    <Route path='/app/home/folders/:folderId/items/:itemId' element={<Item/>}/>
                     <Route path="*" element={ <NotFound /> } />
                 </Routes>
             </FolderStatusManagement>
