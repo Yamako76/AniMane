@@ -117,7 +117,7 @@ const EditItem = ({folderId, item, handleReload}) => {
                 ariaLabel="edit_item"
                 size="small"
                 memoId="edit memo"
-                memoLabel="新しいメモ名"
+                memoLabel="メモ"
                 memoValue={memoValue}
                 memoHandleChange={memoHandleChange}
                 memoHandleRefresh={memoHandleRefresh}

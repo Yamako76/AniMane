@@ -49,9 +49,6 @@ const EditItemDialog = ({
                         helperText={errorText}
                         error={error}
                         onChange={handleChange}
-                        // onKeyDown={(e) => {
-                        //     pressEnter(e, handleSubmit);
-                        // }}
                         value={nameValue}
                         InputProps={{
                             endAdornment: (nameValue === "") ? null :
@@ -64,7 +61,6 @@ const EditItemDialog = ({
                         label={memoLabel}
                         fullWidth
                         variant="outlined"
-                        error={error}
                         onChange={memoHandleChange}
                         value={memoValue}
                         InputProps={{

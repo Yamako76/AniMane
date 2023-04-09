@@ -114,7 +114,7 @@ const AddItem = ({folderId, handleReload}) => {
             nameValue={nameValue}
             submitButtonName="追加"
             memoId="newMemoName"
-            memoLabel="新しいメモ名"
+            memoLabel="メモ"
             memoValue={memoValue}
             memoHandleChange={memoHandleChange}
             memoHandleRefresh={memoHandleRefresh}

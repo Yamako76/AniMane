@@ -34582,20 +34582,25 @@ var AddItem = function AddItem(_ref) {
       error = _useState4[0],
       setError = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      nameValue = _useState6[0],
-      setNameValue = _useState6[1];
+      memoError = _useState6[0],
+      setMemoError = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      memoValue = _useState8[0],
-      setMemoValue = _useState8[1];
+      nameValue = _useState8[0],
+      setNameValue = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      errorText = _useState10[0],
-      setErrorText = _useState10[1];
+      memoValue = _useState10[0],
+      setMemoValue = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      errorText = _useState12[0],
+      setErrorText = _useState12[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_common_Notification__WEBPACK_IMPORTED_MODULE_2__.NoticeContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -34704,7 +34709,7 @@ var AddItem = function AddItem(_ref) {
       nameValue: nameValue,
       submitButtonName: "\u8FFD\u52A0",
       memoId: "newMemoName",
-      memoLabel: "\u65B0\u3057\u3044\u30E1\u30E2\u540D",
+      memoLabel: "\u30E1\u30E2",
       memoValue: memoValue,
       memoHandleChange: memoHandleChange,
       memoHandleRefresh: memoHandleRefresh
@@ -35012,7 +35017,7 @@ var EditItem = function EditItem(_ref) {
       ariaLabel: "edit_item",
       size: "small",
       memoId: "edit memo",
-      memoLabel: "\u65B0\u3057\u3044\u30E1\u30E2\u540D",
+      memoLabel: "\u30E1\u30E2",
       memoValue: memoValue,
       memoHandleChange: memoHandleChange,
       memoHandleRefresh: memoHandleRefresh
@@ -37303,8 +37308,8 @@ var EditItemDialog = function EditItemDialog(_ref) {
           id: memoId,
           label: memoLabel,
           fullWidth: true,
-          variant: "outlined",
-          error: error,
+          variant: "outlined" // error={error}
+          ,
           onChange: memoHandleChange,
           value: memoValue,
           InputProps: {
