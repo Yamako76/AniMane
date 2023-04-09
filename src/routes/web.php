@@ -48,6 +48,7 @@ Auth::routes();
 \Route::middleware(['auth', 'can:view,folder'])->prefix('api/folders/{folder}')->group(function () {
     \Route::get('/items', [\App\Http\Controllers\Api\ItemController::class, 'index']);
     \Route::get('/items/search', [\App\Http\Controllers\Api\ItemController::class, 'search']);
+    \Route::get('/items/{item}',[\App\Http\Controllers\Api\ItemController::class, 'show']);
     \Route::post('/items', [\App\Http\Controllers\Api\ItemController::class, 'create']);
     \Route::put('/items/{item}', [\App\Http\Controllers\Api\ItemController::class, 'update']);
     \Route::delete('/items/{item}', [\App\Http\Controllers\Api\ItemController::class, 'delete']);
