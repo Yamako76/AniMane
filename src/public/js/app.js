@@ -34391,14 +34391,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Paper */ "./node_modules/@mui/material/Paper/Paper.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material_Paper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Paper */ "./node_modules/@mui/material/Paper/Paper.js");
 /* harmony import */ var _tool_EditItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tool/EditItem */ "./resources/js/components/ItemManagement/tool/EditItem.js");
 /* harmony import */ var _tool_DeleteItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tool/DeleteItem */ "./resources/js/components/ItemManagement/tool/DeleteItem.js");
 /* harmony import */ var _tool_tool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tool/tool */ "./resources/js/components/ItemManagement/tool/tool.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
@@ -34424,15 +34428,22 @@ var ViewItemList = function ViewItemList(_ref) {
     var item = _ref2.item;
     var contentList = [{
       "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        title: item.name,
+        title: item.name + "の詳細",
         placement: "bottom-end",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
           textOverflow: "ellipsis",
           overflow: "hidden",
           fontSize: 20,
+          component: react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link,
+          to: "/app/home/folders/" + folderId + "/items/" + item.id,
           sx: {
             margin: "0px 5px",
-            width: titleWidth - 10
+            width: titleWidth - 10,
+            color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900],
+            textDecoration: "none",
+            "&:hover": {
+              color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900]
+            }
           },
           children: item.name
         })
@@ -34468,18 +34479,25 @@ var ViewItemList = function ViewItemList(_ref) {
         alignItems: "flex-end"
       }
     }];
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_9__["default"], {
       variant: "outlined",
       sx: {
         width: "100%",
         height: "50px",
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900],
+        textDecoration: "none",
+        "&:hover": {
+          color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900],
+          outline: 'solid',
+          outlineColor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900]
+        }
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
         container: true,
         children: contentList.map(function (content, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
             container: true,
             item: true,
             sx: content.sx,
@@ -34499,12 +34517,12 @@ var ViewItemList = function ViewItemList(_ref) {
         justifyContent: "center",
         marginTop: "10px"
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
         container: true,
         direction: "column",
         spacing: 1,
         children: items.map(function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
             container: true,
             item: true,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(PaperContent, {
@@ -34582,25 +34600,20 @@ var AddItem = function AddItem(_ref) {
       error = _useState4[0],
       setError = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      memoError = _useState6[0],
-      setMemoError = _useState6[1];
+      nameValue = _useState6[0],
+      setNameValue = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      nameValue = _useState8[0],
-      setNameValue = _useState8[1];
+      memoValue = _useState8[0],
+      setMemoValue = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
       _useState10 = _slicedToArray(_useState9, 2),
-      memoValue = _useState10[0],
-      setMemoValue = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
-      _useState12 = _slicedToArray(_useState11, 2),
-      errorText = _useState12[0],
-      setErrorText = _useState12[1];
+      errorText = _useState10[0],
+      setErrorText = _useState10[1];
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_common_Notification__WEBPACK_IMPORTED_MODULE_2__.NoticeContext),
       _useContext2 = _slicedToArray(_useContext, 2),
@@ -37291,10 +37304,7 @@ var EditItemDialog = function EditItemDialog(_ref) {
           variant: "outlined",
           helperText: errorText,
           error: error,
-          onChange: handleChange // onKeyDown={(e) => {
-          //     pressEnter(e, handleSubmit);
-          // }}
-          ,
+          onChange: handleChange,
           value: nameValue,
           InputProps: {
             endAdornment: nameValue === "" ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ClearButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -37308,8 +37318,7 @@ var EditItemDialog = function EditItemDialog(_ref) {
           id: memoId,
           label: memoLabel,
           fullWidth: true,
-          variant: "outlined" // error={error}
-          ,
+          variant: "outlined",
           onChange: memoHandleChange,
           value: memoValue,
           InputProps: {
@@ -37754,6 +37763,39 @@ var Home = function Home() {
 
 /***/ }),
 
+/***/ "./resources/js/pages/Item.js":
+/*!************************************!*\
+  !*** ./resources/js/pages/Item.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var Item = function Item() {
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useParams)(),
+      itemId = _useParams.itemId;
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    children: itemId
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Item);
+
+/***/ }),
+
 /***/ "./resources/js/pages/NotFound.js":
 /*!****************************************!*\
   !*** ./resources/js/pages/NotFound.js ***!
@@ -37878,15 +37920,17 @@ var NotFound = function NotFound() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
 /* harmony import */ var _pages_Folder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Folder */ "./resources/js/pages/Folder.js");
 /* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/NotFound */ "./resources/js/pages/NotFound.js");
 /* harmony import */ var _components_NavBar_NavBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/NavBar/NavBar */ "./resources/js/components/NavBar/NavBar.js");
 /* harmony import */ var _components_common_Notification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/common/Notification */ "./resources/js/components/common/Notification.js");
 /* harmony import */ var _components_FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/FolderStatusManagement/FolderStatusManagement */ "./resources/js/components/FolderStatusManagement/FolderStatusManagement.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _pages_Item__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Item */ "./resources/js/pages/Item.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -37900,19 +37944,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_common_Notification__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_NavBar_NavBar__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Routes, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_common_Notification__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_components_FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_NavBar_NavBar__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             path: "/app/home",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_pages_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_pages_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             path: "/app/home/folders/:folderId/items",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_pages_Folder__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_pages_Folder__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            path: "/app/home/folders/:folderId/items/:itemId",
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_pages_Item__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             path: "*",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_pages_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_pages_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"], {})
           })]
         })]
       })
@@ -37920,8 +37967,8 @@ var App = function App() {
   });
 };
 
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(App, {})
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(App, {})
 }), document.getElementById('app'));
 
 /***/ }),
