@@ -23,6 +23,15 @@ class ItemController extends Controller
         return response()->json($items, 200);
     }
 
+    public function show(Folder $folder, Item $item): \Illuminate\Http\JsonResponse
+    {
+        if (!$this->hasRelation($folder, $item)) {
+            return response()->json([], 403);
+        }
+
+        return response()->json($item, 200);
+    }
+
     public function create(Folder $folder, ItemRequest $request): \Illuminate\Http\JsonResponse
     {
         \ItemService::createItemRecord($folder, $request->name, $request->memo);
