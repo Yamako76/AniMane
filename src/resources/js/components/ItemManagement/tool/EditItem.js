@@ -12,8 +12,8 @@ import {value_validation} from '../../common/tool';
 const EditItem = ({folderId, item, handleReload}) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
-    const [nameValue, setNameValue] = useState("");
-    const [memoValue, setMemoValue] = useState("");
+    const [nameValue, setNameValue] = useState(item.name);
+    const [memoValue, setMemoValue] = useState(item.memo);
     const [errorText, setErrorText] = useState();
     const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";

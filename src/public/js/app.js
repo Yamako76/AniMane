@@ -36271,12 +36271,12 @@ var EditItem = function EditItem(_ref) {
       error = _useState4[0],
       setError = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(item.name),
       _useState6 = _slicedToArray(_useState5, 2),
       nameValue = _useState6[0],
       setNameValue = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(item.memo),
       _useState8 = _slicedToArray(_useState7, 2),
       memoValue = _useState8[0],
       setMemoValue = _useState8[1];
@@ -36398,9 +36398,7 @@ var EditItem = function EditItem(_ref) {
       memoLabel: "\u30E1\u30E2",
       memoValue: memoValue,
       memoHandleChange: memoHandleChange,
-      memoHandleRefresh: memoHandleRefresh,
-      name: item.name,
-      memo: item.memo
+      memoHandleRefresh: memoHandleRefresh
     })
   });
 };
@@ -38606,9 +38604,7 @@ var EditItemButton = function EditItemButton(_ref) {
       memoValue = _ref.memoValue,
       memoLabel = _ref.memoLabel,
       memoHandleChange = _ref.memoHandleChange,
-      memoHandleRefresh = _ref.memoHandleRefresh,
-      name = _ref.name,
-      memo = _ref.memo;
+      memoHandleRefresh = _ref.memoHandleRefresh;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
       onClick: handleClickOpen,
@@ -38634,9 +38630,7 @@ var EditItemButton = function EditItemButton(_ref) {
       memoValue: memoValue,
       memoLabel: memoLabel,
       memoHandleChange: memoHandleChange,
-      memoHandleRefresh: memoHandleRefresh,
-      name: name,
-      memo: memo
+      memoHandleRefresh: memoHandleRefresh
     })]
   });
 };
@@ -38702,9 +38696,7 @@ var EditItemDialog = function EditItemDialog(_ref) {
       memoLabel = _ref.memoLabel,
       memoValue = _ref.memoValue,
       memoHandleChange = _ref.memoHandleChange,
-      memoHandleRefresh = _ref.memoHandleRefresh,
-      name = _ref.name,
-      memo = _ref.memo;
+      memoHandleRefresh = _ref.memoHandleRefresh;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_5__["default"], {
       open: open,
@@ -38721,8 +38713,7 @@ var EditItemDialog = function EditItemDialog(_ref) {
           variant: "outlined",
           helperText: errorText,
           error: error,
-          onChange: handleChange // defaultValue={name}
-          ,
+          onChange: handleChange,
           value: nameValue,
           InputProps: {
             endAdornment: nameValue === "" ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ClearButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -38738,8 +38729,7 @@ var EditItemDialog = function EditItemDialog(_ref) {
           fullWidth: true,
           variant: "outlined",
           onChange: memoHandleChange,
-          value: memoValue // defaultValue={memo}
-          ,
+          value: memoValue,
           InputProps: {
             endAdornment: memoValue === "" ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ClearButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
               title: "\u5165\u529B\u306E\u30AF\u30EA\u30A2",
