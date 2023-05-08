@@ -12,11 +12,10 @@ import {grey} from "@mui/material/colors";
 // アイテムの一覧表示
 const ViewItemList = ({folderId, items, handleReload}) => {
     const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 90;
+    const titleWidth = BoxWidth - 50;
 
     // 各アイテムを表示するための枠組み
     // - アイテムのタイトルの表示
-    // - アイテムの編集ボタン
     // - アイテムの削除ボタン の作成
     const PaperContent = ({item}) => {
         const contentList = [
@@ -30,7 +29,7 @@ const ViewItemList = ({folderId, items, handleReload}) => {
                         to={"/app/home/folders/" + folderId + "/items/" + item.id}
                         sx={{
                             margin: "0px 5px",
-                            width: titleWidth - 10,
+                            width:  String(titleWidth - 10) + "px",
                             color: grey[900],
                             textDecoration: "none",
                             "&:hover": {color: grey[900]}
@@ -39,11 +38,7 @@ const ViewItemList = ({folderId, items, handleReload}) => {
                         {item.name}
                     </Box>
                 </Tooltip>,
-                "sx": {width: titleWidth, display: "flex", justifyContent: "flex-start", alignItems: "flex-end"}
-            },
-            {
-                "body": <EditItem folderId={folderId} item={item} handleReload={handleReload}/>,
-                "sx": {width: "40px", display: "flex", justifyContent: "center", alignItems: "flex-end"}
+                "sx": {width: String(titleWidth) + "px", display: "flex", justifyContent: "flex-start", alignItems: "flex-end"}
             },
             {
                 "body": <DeleteItem folderId={folderId} item={item} handleReload={handleReload}/>,
