@@ -120,7 +120,7 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                     },
                     params: {
                         part: "snippet",
-                        q: keyWord,
+                        q: keyWord　+ " pv",
                         maxResults: 1,
                         type: "video",
                         key: "AIzaSyCp814viDX87DANnIYs8o2SsWwtwPxOMvY"
