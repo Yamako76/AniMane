@@ -4,12 +4,14 @@ import EditItemButton from '../../common/EditItemButton';
 import {NoticeContext} from '../../common/Notification';
 import axios from 'axios';
 import {value_validation} from '../../common/tool';
+import EditIcon from "@mui/icons-material/Edit";
+import {grey} from "@mui/material/colors";
 
 // アイテム編集機能 //
 // アイテムの編集ボタンを押すとアイテムを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとアイテム編集のキャンセルまたはアイテム編集が完了する
 // 入力は1字以上200字以下で制限する
-const EditItem = ({folderId, item, handleReload}) => {
+const EditItem = ({folderId, item}) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [nameValue, setNameValue] = useState(item.name);
@@ -29,12 +31,8 @@ const EditItem = ({folderId, item, handleReload}) => {
     }
 
     const handleRefresh = () => {
-        setNameValue("");
+        setNameValue('');
         handleErrorRefresh();
-    }
-
-    const memoHandleRefresh = () => {
-        setMemoValue("");
     }
 
     const handleClickOpen = () => {
@@ -43,8 +41,8 @@ const EditItem = ({folderId, item, handleReload}) => {
 
     const handleClose = () => {
         setOpen(false);
-        handleRefresh();
-        memoHandleRefresh();
+        setNameValue(item.name);
+        setMemoValue(item.memo);
         handleErrorRefresh();
     };
 
@@ -74,7 +72,6 @@ const EditItem = ({folderId, item, handleReload}) => {
     const ApiAfterAction = (payload) => {
         dispatch({type: 'update_message', payload: payload});
         dispatch({type: 'handleNoticeOpen'});
-        handleReload();
     }
 
     const updateItem = () => {
@@ -120,7 +117,8 @@ const EditItem = ({folderId, item, handleReload}) => {
                 memoLabel="メモ"
                 memoValue={memoValue}
                 memoHandleChange={memoHandleChange}
-                memoHandleRefresh={memoHandleRefresh}
+                startIcon={<EditIcon/>}
+                sx={{"&:hover": {color: grey[900]}}}
             />
         </Box>
     );

@@ -7,7 +7,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import ClearButton from './ClearButton';
-import {pressEnter} from './tool';
 
 // Objectの追加・編集する画面
 // Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
@@ -31,7 +30,6 @@ const EditItemDialog = ({
                             memoLabel,
                             memoValue,
                             memoHandleChange,
-                            memoHandleRefresh
 
                         }) => {
     return (
@@ -58,15 +56,13 @@ const EditItemDialog = ({
                     <TextField
                         margin="dense"
                         id={memoId}
+                        multiline
+                        rows={5}
                         label={memoLabel}
                         fullWidth
                         variant="outlined"
                         onChange={memoHandleChange}
                         value={memoValue}
-                        InputProps={{
-                            endAdornment: (memoValue === "") ? null :
-                                <ClearButton title="入力のクリア" handleRefresh={memoHandleRefresh} fontSize="small"/>
-                        }}
                     />
                 </DialogContent>
                 <DialogActions>

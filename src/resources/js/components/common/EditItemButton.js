@@ -1,8 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import {IconButton} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import EditItemDialog from './EditItemDialog';
+import Button from "@mui/material/Button";
 
 // Objectの編集を行う画面を表するためのボタン
 // ボタンを押すと編集画面を表示し
@@ -28,21 +27,22 @@ const EditItemButton = ({
                             memoValue,
                             memoLabel,
                             memoHandleChange,
-                            memoHandleRefresh
-
+                            startIcon,
 
                         }) => {
     return (
         <Box>
-            <IconButton
+            <Button
                 onClick={handleClickOpen}
                 aria-label={ariaLabel}
                 disableFocusRipple={true}
                 size={size}
                 sx={sx}
+                startIcon={startIcon}
+                color="inherit"
             >
-                <EditIcon/>
-            </IconButton>
+                編集
+            </Button>
             <EditItemDialog
                 taskName={taskName}
                 id={id}
@@ -60,7 +60,6 @@ const EditItemButton = ({
                 memoValue={memoValue}
                 memoLabel={memoLabel}
                 memoHandleChange={memoHandleChange}
-                memoHandleRefresh={memoHandleRefresh}
             />
         </Box>
     );

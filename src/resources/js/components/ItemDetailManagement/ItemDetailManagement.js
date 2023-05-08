@@ -11,13 +11,15 @@ import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {grey} from "@mui/material/colors";
+import EditItem from "../ItemManagement/tool/EditItem";
+import Paper from "@mui/material/Paper";
 
 const ItemDetailManagement = ({itemId, folderId}) => {
 
     const [name, setName] = useState();
     const [memo, setMemo] = useState();
+    const [Item, setItem] = useState();
     const [videoId, setVideoId] = useState();
-    const [reRender, setReRender] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [notice_state, notice_dispatch] = useContext(NoticeContext);
     const navigate = useNavigate();
@@ -47,21 +49,6 @@ const ItemDetailManagement = ({itemId, folderId}) => {
             getItem();
         }
     }, [])
-
-
-    const handleReRender = () => {
-        setReRender(true);
-    }
-
-    const handleReload = () => {
-        if (isLoading || !isMounted.current) {
-            return;
-        }
-        setIsLoading(true);
-        setName('');
-        setMemo('');
-        handleReRender();
-    }
 
     const failedToLoad = () => {
         notice_dispatch({type: "update_message", payload: "アニメ詳細の読み込みに失敗しました"});
@@ -109,6 +96,7 @@ const ItemDetailManagement = ({itemId, folderId}) => {
         try {
             const res = await axios.get(`/api/folders/${folderId}/items/${itemId}`, {signal: abortCtrl.signal});
             item = {name: res.data.name, memo: res.data.memo};
+            setItem(res.data);
         } catch {
             failedToLoad();
         } finally {
@@ -167,22 +155,25 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                     alignItems: "flex-end",
                     display: "flex",
                     width: "100%",
-                    height: 50,
+                    height: "50px",
                 }}>
                     <Button
                         size={"small"}
                         component={Link}
                         to={"/app/home/folders/" + folderId + "/items/"}
-                        variant="outlined"
+                        variant="text"
                         startIcon={<ArrowBackIcon/>}
+                        sx={{marginRight: "10px", "&:hover": {color: grey[900]}}}
+                        color="inherit"
                     >
                         戻る
                     </Button>
+                    <EditItem item={Item} folderId={folderId}/>
                 </Box>
                 <Divider sx={{width: "100%", marginTop: "5px", marginBottom: "5px"}}/>
                 <Box sx={{
                     width: "100%",
-                    height: 100,
+                    height: "100px",
                     justifyContent: "flex-start",
                     alignItems: "center",
                     display: "flex",
@@ -203,11 +194,11 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                 </Box>
                 <Box sx={{
                     width: "100%",
-                    height: 200,
+                    height: "250px",
                     justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
-                    paddingLeft: "10px"
+                    paddingLeft: "10px",
                 }}>
                     <Grid
                         container
@@ -225,6 +216,7 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 display: "flex",
+                                marginBottom: "10px"
                             }}
                         >
                             <Box sx={{
@@ -241,16 +233,32 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 display: "flex",
+                                paddingLeft: "5px",
+                                paddingRight: "5px",
                             }}
                         >
-                            <Typography>{memo}</Typography>
+                            <Paper
+                                variant="outlined"
+                                sx={{
+                                    width: "100%",
+                                    height: "200px",
+                                    justifyContent: "flex-start",
+                                    alignItems: "flex-start",
+                                    display: "flex",
+                                    overflow: "auto",
+                                    padding: "5px",
+                                }}>
+                                <Typography>
+                                    {memo}
+                                </Typography>
+                            </Paper>
                         </Grid>
                     </Grid>
                 </Box>
                 <Box
                     sx={{
                         width: "100%",
-                        height: 50,
+                        height: "50px",
                         justifyContent: "flex-start",
                         alignItems: "center",
                         display: "flex",
@@ -267,12 +275,12 @@ const ItemDetailManagement = ({itemId, folderId}) => {
                 </Box>
                 <Box sx={{
                     width: "100%",
-                    height: 400,
+                    height: "400px",
                     justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
-                    minWidth: 320,
-                    maxWidth: 1200,
+                    minWidth: "320px",
+                    maxWidth: "1200px",
                 }}>
                     {videoId == null || !isMounted.current ? null : <ViewYouTubeVideo videoId={videoId}/>}
                 </Box>
@@ -283,8 +291,8 @@ const ItemDetailManagement = ({itemId, folderId}) => {
     return (
         <Box sx={{
             width: "100%",
-            minWidth: 300,
-            maxWidth: 2000,
+            minWidth: "300px",
+            maxWidth: "2000px",
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
