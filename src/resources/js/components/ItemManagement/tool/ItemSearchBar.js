@@ -7,11 +7,11 @@ import Tooltip from '@mui/material/Tooltip';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ClearButton from '../../common/ClearButton';
-import { getBoxWidth, getSearchBarWidth } from './tool';
-import { pressEnter } from '../../common/tool';
+import {getBoxWidth, getSearchBarWidth} from './tool';
+import {pressEnter} from '../../common/tool';
 
 // フォルダ内アイテム検索バー
-const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit, value }) => {
+const ItemSearchBar = ({handleChange, handleRefresh, handleReload, handleSubmit, value}) => {
     const BoxWidth = getBoxWidth();
     const SearchBarWidth = getSearchBarWidth();
 
@@ -30,18 +30,21 @@ const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit
         width: SearchBarWidth,
     };
     return (
-        <Box sx={ box_sx }>
-            <Paper elevation={ 24 } sx={ paper_sx }>
-                <Tooltip title="検索"><IconButton onClick={ handleSubmit }><SearchIcon /></IconButton></Tooltip>
+        <Box sx={box_sx}>
+            <Paper elevation={24} sx={paper_sx}>
+                <Tooltip title="検索"><IconButton onClick={handleSubmit}><SearchIcon/></IconButton></Tooltip>
                 <InputBase
-                    sx={{ ml: 1, flex: 1 }}
+                    sx={{ml: 1, flex: 1}}
                     placeholder="フォルダ内検索"
-                    value={ value }
-                    onChange={ handleChange }
-                    onKeyDown={ (e) => { pressEnter(e, handleSubmit); } }
+                    value={value}
+                    onChange={handleChange}
+                    onKeyDown={(e) => {
+                        pressEnter(e, handleSubmit);
+                    }}
                 />
-                { (value === "") ? null : <ClearButton title="検索のクリア" handleRefresh={ handleRefresh } /> }
-                <Tooltip title="アニメの再読み込み" placement="bottom"><IconButton onClick={ handleReload }><RefreshIcon /></IconButton></Tooltip>
+                {(value === "") ? null : <ClearButton title="検索のクリア" handleRefresh={handleRefresh}/>}
+                <Tooltip title="アニメの再読み込み" placement="bottom"><IconButton
+                    onClick={handleReload}><RefreshIcon/></IconButton></Tooltip>
             </Paper>
         </Box>
     );

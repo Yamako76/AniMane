@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { FixedSizeList } from 'react-window';
+import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
+import {FixedSizeList} from 'react-window';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import ListItem from '@mui/material/ListItem';
@@ -9,17 +9,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import FolderIcon from '@mui/icons-material/Folder';
 import EditFolder from '../tool/EditFolder';
 import DeleteFolder from '../tool/DeleteFolder';
-import { grey, red, yellow } from '@mui/material/colors';
-import { useWindowDimensions } from '../../../common/tool';
-import { FolderStatusManagementContext } from '../../../FolderStatusManagement/FolderStatusManagement';
-import { NAV_BAR_WIDTH } from '../../NavBar';
+import {grey, yellow} from '@mui/material/colors';
+import {useWindowDimensions} from '../../../common/tool';
+import {FolderStatusManagementContext} from '../../../FolderStatusManagement/FolderStatusManagement';
+import {NAV_BAR_WIDTH} from '../../NavBar';
 import NotExistFolders from './NotExitstFoders';
 import LoadingFolder from './LoadingFolder';
-import { fontWeight } from '@mui/system';
 
 // フォルダ一覧を表示するコンポーネント
-const ViewFolderList = ({ folders, handleReload }) => {
-    const { _, height } = useWindowDimensions();
+const ViewFolderList = ({folders, handleReload}) => {
+    const {_, height} = useWindowDimensions();
     const NavBarBody_h = height - 290;  // headerとfooterのheightを引いた残りの高さ
     const [state, dispatch] = useContext(FolderStatusManagementContext);
 
@@ -27,44 +26,44 @@ const ViewFolderList = ({ folders, handleReload }) => {
     // - フォルダの選択
     // - フォルダの編集
     // - フォルダの削除が可能
-    const renderRow = ({ index, style }) => {
+    const renderRow = ({index, style}) => {
         const isSelected = folders[index].id.toString() === state.current_folderId;
         const fontWeight = isSelected ? 'bold' : 'regular';
 
         return (
             <ListItem
-                style={ style }
-                key={ index }
+                style={style}
+                key={index}
                 component="div"
                 disablePadding
                 secondaryAction={
                     <ListItemIcon>
-                        <EditFolder folder={ folders[index] } handleReload={ handleReload } />
-                        <DeleteFolder folder={ folders[index] } handleReload={ handleReload } />
+                        <EditFolder folder={folders[index]} handleReload={handleReload}/>
+                        <DeleteFolder folder={folders[index]} handleReload={handleReload}/>
                     </ListItemIcon>
                 }
             >
-                <Tooltip title={ folders[index].name } placement="bottom-end">
-                <ListItemButton
-                    component={ Link }
-                    to={ "/app/home/folders/" + folders[index].id + "/items" }
-                    selected={ isSelected }
-                    sx={{ "&:hover": { color: grey[900] } }}
-                >
-                    <ListItemIcon>
-                        <FolderIcon />
-                    </ListItemIcon>
-                    <Box
-                        component="div"
-                        textOverflow="ellipsis"
-                        overflow="hidden"
-                        fontSize={ 15 }
-                        width={ NAV_BAR_WIDTH - 170 }
-                        sx={{ fontWeight: fontWeight }}
+                <Tooltip title={folders[index].name} placement="bottom-end">
+                    <ListItemButton
+                        component={Link}
+                        to={"/app/home/folders/" + folders[index].id + "/items"}
+                        selected={isSelected}
+                        sx={{"&:hover": {color: grey[900]}}}
                     >
-                        { folders[index].name }
-                    </Box>
-                </ListItemButton>
+                        <ListItemIcon>
+                            <FolderIcon/>
+                        </ListItemIcon>
+                        <Box
+                            component="div"
+                            textOverflow="ellipsis"
+                            overflow="hidden"
+                            fontSize={15}
+                            width={NAV_BAR_WIDTH - 170}
+                            sx={{fontWeight: fontWeight}}
+                        >
+                            {folders[index].name}
+                        </Box>
+                    </ListItemButton>
                 </Tooltip>
             </ListItem>
         );
@@ -74,13 +73,13 @@ const ViewFolderList = ({ folders, handleReload }) => {
     const FolderList = () => {
         return (
             <FixedSizeList
-                height={ NavBarBody_h }
-                width={ NAV_BAR_WIDTH }
-                itemSize={ 50 }
-                itemCount={ folders.length }
-                overscanCount={ 5 }
+                height={NavBarBody_h}
+                width={NAV_BAR_WIDTH}
+                itemSize={50}
+                itemCount={folders.length}
+                overscanCount={5}
             >
-                { renderRow }
+                {renderRow}
             </FixedSizeList>
         );
     }
@@ -88,7 +87,7 @@ const ViewFolderList = ({ folders, handleReload }) => {
     const Main = () => {
         return (
             <Box>
-                { (folders.length) ? <FolderList /> : <NotExistFolders NavBarBody_h={ NavBarBody_h } /> }
+                {(folders.length) ? <FolderList/> : <NotExistFolders NavBarBody_h={NavBarBody_h}/>}
             </Box>
         );
     }
@@ -103,8 +102,8 @@ const ViewFolderList = ({ folders, handleReload }) => {
     };
 
     return (
-        <Box sx={ box_sx }>
-            { (state.isLoading) ? <LoadingFolder NavBarBody_h={ NavBarBody_h }/> : <Main /> }
+        <Box sx={box_sx}>
+            {(state.isLoading) ? <LoadingFolder NavBarBody_h={NavBarBody_h}/> : <Main/>}
         </Box>
     );
 }

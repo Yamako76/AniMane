@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 
 // 画面のwidthとheightを取得する関数 //
 export const useWindowDimensions = () => {
     const getWindowDimensions = () => {
-        const { innerWidth: width, innerHeight: height } = window;
+        const {innerWidth: width, innerHeight: height} = window;
         return {
             width,
             height
@@ -11,13 +11,13 @@ export const useWindowDimensions = () => {
     }
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-        useEffect(() => {
-            const onResize = () => {
-                setWindowDimensions(getWindowDimensions());
-            }
-            window.addEventListener('resize', onResize);
-            return () => window.removeEventListener('resize', onResize);
-        }, []);
+    useEffect(() => {
+        const onResize = () => {
+            setWindowDimensions(getWindowDimensions());
+        }
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
     return windowDimensions;
 }
 
@@ -34,7 +34,7 @@ export const value_validation = (target_value) => {
 
 // Enter入力の判定
 export const pressEnter = (e, handleSubmit) => {
-    if(e.key === "Enter") {
+    if (e.key === "Enter") {
         e.preventDefault();
         handleSubmit();
     }

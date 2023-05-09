@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from '@mui/material/Skeleton';
-import { getBoxWidth } from '../tool/tool';
+import {getBoxWidth} from '../tool/tool';
 
 // フォルダタイトルのロード中に表示
 const LoadingTitle = () => {
@@ -8,7 +8,7 @@ const LoadingTitle = () => {
     return (
         <Skeleton
             variant="rectangular"
-            sx={{ height: "40px", width: BoxWidth, marginTop: "40px", marginBottom: "5px" }}
+            sx={{height: "40px", width: BoxWidth, marginTop: "40px", marginBottom: "5px"}}
         >
         </Skeleton>
     );

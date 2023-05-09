@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { grey, yellow } from '@mui/material/colors';
-import { NAV_BAR_WIDTH } from './NavBar';
+import {grey, yellow} from '@mui/material/colors';
+import {NAV_BAR_WIDTH} from './NavBar';
 
 // ログアウトボタン
 const LogOutButton = () => {
@@ -16,11 +16,11 @@ const LogOutButton = () => {
         fontWeight: "bold",
         color: grey[900],
         borderRadius: 0,
-        "&:hover": { bgcolor: yellow[800] },
+        "&:hover": {bgcolor: yellow[800]},
     };
 
     return (
-        <Button type="submit" sx={ button_sx }>
+        <Button type="submit" sx={button_sx}>
             ログアウト
         </Button>
     );
@@ -34,8 +34,8 @@ const NavBarFoot = () => {
 
     return (
         <Box component="form" action='/logout' method='POST'>
-            <input type="hidden" name="_token" value={ csrf_token } />
-            <LogOutButton />
+            <input type="hidden" name="_token" value={csrf_token}/>
+            <LogOutButton/>
         </Box>
     );
 }

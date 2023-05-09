@@ -1,11 +1,11 @@
 import React from "react";
 import Box from '@mui/material/Box';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { grey, yellow } from "@mui/material/colors";
-import { useWindowDimensions } from "../components/common/tool";
+import {grey, yellow} from "@mui/material/colors";
+import {useWindowDimensions} from "../components/common/tool";
 
 const box_sx = {
     width: "100vw",
@@ -28,19 +28,17 @@ const button_sx = {
     fontWeight: "bold",
     color: grey[900],
     bgcolor: yellow[600],
-    "&:hover": { color: grey[900], bgcolor: yellow[800] },
+    "&:hover": {color: grey[900], bgcolor: yellow[800]},
 };
 
 const getGridWidth = () => {
-    const { width, _ } = useWindowDimensions();
+    const {width, _} = useWindowDimensions();
     const gridWidth = width * 0.7;
-    if(gridWidth < 300) {
+    if (gridWidth < 300) {
         return 300;
-    }
-    else if(gridWidth > 1200) {
+    } else if (gridWidth > 1200) {
         return 1200;
-    }
-    else {
+    } else {
         return gridWidth;
     }
 }
@@ -49,24 +47,24 @@ const NotFound = () => {
     const gridWidth = getGridWidth();
     const contentList = [
         {
-            "body": <Typography variant="h6" fontWeight="bold">{ "お探しのページは見つかりませんでした(404)" }</Typography>
+            "body": <Typography variant="h6" fontWeight="bold">{"お探しのページは見つかりませんでした(404)"}</Typography>
         },
         {
             "body": <Typography variant="body1">入力したアドレスに誤りがあるかページが移動した可能性があります。</Typography>
         },
         {
-            "body": <Button component={ Link } to="/app/home" sx={ button_sx }>ホーム</Button>
+            "body": <Button component={Link} to="/app/home" sx={button_sx}>ホーム</Button>
         }
     ];
 
     return (
-        <Box sx={ box_sx }>
-            <Grid container direction="column" width={ gridWidth }>
+        <Box sx={box_sx}>
+            <Grid container direction="column" width={gridWidth}>
                 {
                     contentList.map((content, index) => {
                         return (
-                            <Grid key={ index } container item sx={ grid_sx }>
-                                { content.body }
+                            <Grid key={index} container item sx={grid_sx}>
+                                {content.body}
                             </Grid>
                         );
                     })

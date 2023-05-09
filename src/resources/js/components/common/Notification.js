@@ -1,4 +1,4 @@
-import React, { Fragment, createContext, useReducer } from 'react';
+import React, {createContext, Fragment, useReducer} from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // 例: フォルダの読み込みに失敗した場合 => フォルダの読み込みに失敗しました とSnackBarで通知をする
 
 const SlideTransition = (props) => {
-    return <Slide {...props} direction="up" />;
+    return <Slide {...props} direction="up"/>;
 }
 
 const initialState = {
@@ -18,18 +18,18 @@ const initialState = {
 
 export const NoticeContext = createContext(initialState);
 
-const Notification = ({ children }) => {
+const Notification = ({children}) => {
 
     const [state, dispatch] = useReducer((state, action) => {
-        switch(action.type) {
+        switch (action.type) {
             case 'handleNoticeOpen':
-                return { ...state, isNotice: true }
+                return {...state, isNotice: true}
 
             case 'handleNoticeClose':
-                return { ...state, isNotice: false }
+                return {...state, isNotice: false}
 
             case 'update_message':
-                return { ...state, NoticeMessage: action.payload }
+                return {...state, NoticeMessage: action.payload}
 
             default:
                 return state;
@@ -42,24 +42,24 @@ const Notification = ({ children }) => {
                 size="small"
                 aria-label="close"
                 color="inherit"
-                onClick={ () => dispatch({ type: 'handleNoticeClose' }) }
+                onClick={() => dispatch({type: 'handleNoticeClose'})}
             >
-                <CloseIcon fontSize="small" />
+                <CloseIcon fontSize="small"/>
             </IconButton>
         </Fragment>
     );
 
     return (
         <NoticeContext.Provider value={[state, dispatch]}>
-            { children }
+            {children}
             <Snackbar
-                open={ state.isNotice }
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                onClose={ () => dispatch({ type: 'handleNoticeClose' }) }
-                TransitionComponent={ SlideTransition }
-                message={ state.NoticeMessage }
-                autoHideDuration={ 5000 }
-                action={ action }
+                open={state.isNotice}
+                anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                onClose={() => dispatch({type: 'handleNoticeClose'})}
+                TransitionComponent={SlideTransition}
+                message={state.NoticeMessage}
+                autoHideDuration={5000}
+                action={action}
             />
         </NoticeContext.Provider>
     );

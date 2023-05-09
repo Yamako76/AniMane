@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, {useContext, useState} from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import SortIcon from '@mui/icons-material/Sort';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { SortContext } from '../../common/SortManagement';
+import {SortContext} from '../../common/SortManagement';
 
 // アイテムの並べ替えをするMenu
 // 0:  作成順
@@ -19,7 +19,7 @@ const options = [
     "タイトル順",
 ];
 
-const SortItem = ({ isLoading }) => {
+const SortItem = ({isLoading}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [state, dispatch] = useContext(SortContext);
@@ -34,8 +34,10 @@ const SortItem = ({ isLoading }) => {
 
     const handleSortIndex = (index) => {
         handleClose();
-        if(isLoading) { return; }
-        dispatch({ type: "setSortIndex", payload: index });
+        if (isLoading) {
+            return;
+        }
+        dispatch({type: "setSortIndex", payload: index});
     }
 
     return (
@@ -43,20 +45,20 @@ const SortItem = ({ isLoading }) => {
             <Tooltip title="並び替え">
                 <IconButton
                     id="sort-button"
-                    aria-controls={ open ? "sort-menu" : undefined }
+                    aria-controls={open ? "sort-menu" : undefined}
                     aria-haspopup="true"
-                    aria-expanded={ open ? "true" : undefined }
-                    onClick={ handleClick }
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
                 >
-                    <SortIcon />
+                    <SortIcon/>
                 </IconButton>
             </Tooltip>
 
             <Menu
                 id="sort-menu"
-                anchorEl={ anchorEl }
-                open={ open }
-                onClose={ handleClose }
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
                 MenuListProps={{
                     "aria-labelledby": "sort-button",
                 }}
@@ -65,11 +67,13 @@ const SortItem = ({ isLoading }) => {
                     options.map((option, index) => {
                         return (
                             <MenuItem
-                                key={ index }
-                                selected={ index === state.sortIndex }
-                                onClick={ () => { handleSortIndex(index); } }
+                                key={index}
+                                selected={index === state.sortIndex}
+                                onClick={() => {
+                                    handleSortIndex(index);
+                                }}
                             >
-                                { option }
+                                {option}
                             </MenuItem>
                         );
                     })

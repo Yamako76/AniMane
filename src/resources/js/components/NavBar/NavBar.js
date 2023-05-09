@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import NavBarContent from './NavBarContent';
-import { grey } from '@mui/material/colors';
+import {grey} from '@mui/material/colors';
 
 // Width of Navgation Bar
 export const NAV_BAR_WIDTH = 300;
@@ -12,30 +12,30 @@ export const NAV_BAR_WIDTH = 300;
 // Drwaerの表示制御
 // メニューボタンを押すとNavigation Contentを表示し
 // 再度, メニューボタンを押すとNavigation Contentを閉じる
-const DrawerHandleButton = ({ onClick, sx, color }) => {
+const DrawerHandleButton = ({onClick, sx, color}) => {
     return (
         <IconButton
             size="large"
-            onClick={ onClick }
-            sx={ sx }
+            onClick={onClick}
+            sx={sx}
         >
-            <DensityMediumIcon sx={{ color: color }}></DensityMediumIcon>
+            <DensityMediumIcon sx={{color: color}}></DensityMediumIcon>
         </IconButton>
     );
 }
 
 // Drwaerが表示された時の内容
-const DrawerContent = ({ onClick }) => {
+const DrawerContent = ({onClick}) => {
     return (
         <Box
-            sx={{ width: NAV_BAR_WIDTH }}
+            sx={{width: NAV_BAR_WIDTH}}
             role="presentation"
         >
-            <NavBarContent />
+            <NavBarContent/>
             <DrawerHandleButton
-                onClick={ onClick }
-                sx={{ position: "absolute", right: "0%", top: "0%" }}
-                color={ grey[900] }
+                onClick={onClick}
+                sx={{position: "absolute", right: "0%", top: "0%"}}
+                color={grey[900]}
             />
         </Box>
     );
@@ -61,15 +61,15 @@ const NavBar = () => {
     return (
         <Box>
             <DrawerHandleButton
-                onClick={ handleClickOpen }
-                sx={{ position: "fixed", left: "0%", top: "0%" }}
-                color={ grey[900] }
+                onClick={handleClickOpen}
+                sx={{position: "fixed", left: "0%", top: "0%"}}
+                color={grey[900]}
             />
             <Drawer
-                open={ open }
-                onClose={ handleClickClose }
+                open={open}
+                onClose={handleClickClose}
             >
-                <DrawerContent onClick={ handleClickClose } />
+                <DrawerContent onClick={handleClickClose}/>
             </Drawer>
         </Box>
     );

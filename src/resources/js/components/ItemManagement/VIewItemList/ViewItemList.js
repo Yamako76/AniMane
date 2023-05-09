@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import EditItem from '../tool/EditItem';
 import DeleteItem from '../tool/DeleteItem';
 import {getBoxWidth} from '../tool/tool';
 import {grey} from "@mui/material/colors";
@@ -29,7 +28,7 @@ const ViewItemList = ({folderId, items, handleReload}) => {
                         to={"/app/home/folders/" + folderId + "/items/" + item.id}
                         sx={{
                             margin: "0px 5px",
-                            width:  String(titleWidth - 10) + "px",
+                            width: String(titleWidth - 10) + "px",
                             color: grey[900],
                             textDecoration: "none",
                             "&:hover": {color: grey[900]}
@@ -38,7 +37,12 @@ const ViewItemList = ({folderId, items, handleReload}) => {
                         {item.name}
                     </Box>
                 </Tooltip>,
-                "sx": {width: String(titleWidth) + "px", display: "flex", justifyContent: "flex-start", alignItems: "flex-end"}
+                "sx": {
+                    width: String(titleWidth) + "px",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-end"
+                }
             },
             {
                 "body": <DeleteItem folderId={folderId} item={item} handleReload={handleReload}/>,

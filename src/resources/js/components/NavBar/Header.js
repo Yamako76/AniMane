@@ -1,9 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { grey, yellow } from '@mui/material/colors';
-import { NAV_BAR_WIDTH } from './NavBar';
+import {grey, yellow} from '@mui/material/colors';
+import {NAV_BAR_WIDTH} from './NavBar';
 
 // Navigation barのHeader部分
 // プロダクト名を表示
@@ -25,15 +25,15 @@ const NavBarHead = () => {
         fontSize: 30,
         color: grey[900],
         textDecoration: "none",
-        "&:hover": { color: grey[900] },
+        "&:hover": {color: grey[900]},
     };
 
     return (
-        <Box sx={ box_sx }>
+        <Box sx={box_sx}>
             <Typography
-                component={ Link }
+                component={Link}
                 to="/app/home"
-                sx={ typo_sx }
+                sx={typo_sx}
             >
                 AniMane
             </Typography>

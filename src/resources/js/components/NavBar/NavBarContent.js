@@ -7,9 +7,9 @@ import NavBarBody from './NavBarBody/NavBarBody';
 const NavBarContent = () => {
     return (
         <Box>
-            <NavBarHead />
-            <NavBarBody />
-            <NavBarFoot />
+            <NavBarHead/>
+            <NavBarBody/>
+            <NavBarFoot/>
         </Box>
     );
 }

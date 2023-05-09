@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, {createContext, useReducer} from 'react';
 
 // アイテムの並べ替えStateを管理する
 // 0:  作成順
@@ -12,12 +12,12 @@ const initialState = {
 
 export const SortContext = createContext(initialState);
 
-const SortManagement = ({ children }) => {
+const SortManagement = ({children}) => {
 
     const [state, dispatch] = useReducer((state, action) => {
-        switch(action.type) {
+        switch (action.type) {
             case 'setSortIndex':
-                return { ...state, sortIndex: action.payload }
+                return {...state, sortIndex: action.payload}
 
             default:
                 return state;
@@ -26,7 +26,7 @@ const SortManagement = ({ children }) => {
 
     return (
         <SortContext.Provider value={[state, dispatch]}>
-            { children }
+            {children}
         </SortContext.Provider>
     );
 }
