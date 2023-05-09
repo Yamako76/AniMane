@@ -2,18 +2,17 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Folder;
 use App\Models\Item;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ItemControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         parent::setUp();
         $this->seed();
@@ -52,20 +51,21 @@ class ItemControllerTest extends TestCase
     // itemsの取得時
     // - folderが存在しなければerror404
     // - Auth::user()と$folder->userIdが一致しなければerror403
-    // - item?sortが存在しない場合error404
+    // - itemsが存在しなければ、error404
     public function test_check_error_in_get_items()
     {
-        /*** folderが存在しなければerror404 ***/
+        // folderが存在しなければerror404
         $response = $this->actingAs($this->authUser)->get("/api/folders/100/items?page=1&sort=oldest");
         $response->assertStatus(404);
 
-        /*** Auth::user()と$folder->userIdが一致しなければerror403 ***/
+        // Auth::user()と$folder->userIdが一致しなければerror403
         $anotherUser = User::where('email', 'test@email.com')->first();
         $response = $this->actingAs($anotherUser)->get("{$this->PATH}?page=1&sort=oldest");
         $response->assertStatus(403);
 
-        /*** item?sortが存在しない場合error404 ***/
-        $response = $this->actingAs($this->authUser)->get("{$this->PATH}?page=1&sort=");
+        // itemsが存在しなければ、error404
+        \ItemService::shouldReceive('getItemsByFolder')->andReturn(null)->once();
+        $response = $this->actingAs($this->authUser)->get("{$this->PATH}?page=1&sort=oldest");
         $response->assertStatus(404);
     }
 
@@ -74,9 +74,9 @@ class ItemControllerTest extends TestCase
     // 認証済みユーザーはアイテムの作成が可能
     public function test_authUser_can_create_an_item()
     {
-        $response = $this->actingAs($this->authUser)->postJson($this->PATH, [ 'name' => 'new item' ]);
+        $response = $this->actingAs($this->authUser)->postJson($this->PATH, ['name' => 'new item']);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('items', [ 'name' => 'new item' ]);
+        $this->assertDatabaseHas('items', ['name' => 'new item']);
     }
 
     // アイテム作成時
@@ -86,7 +86,7 @@ class ItemControllerTest extends TestCase
     public function test_check_error_in_create_item()
     {
         /*** folderが存在しなければerror404 ***/
-        $response = $this->actingAs($this->authUser)->postJson("/api/folders/100/items", [ 'name' => 'new folder' ]);
+        $response = $this->actingAs($this->authUser)->postJson("/api/folders/100/items", ['name' => 'new folder']);
         $response->assertStatus(404);
 
         /*** requestにnameがない, もしくは""か200文字を超える場合error ***/
@@ -95,18 +95,18 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(422);
 
         // name = ""の場合
-        $response = $this->actingAs($this->authUser)->postJson($this->PATH, [ 'name' => "" ]);
+        $response = $this->actingAs($this->authUser)->postJson($this->PATH, ['name' => ""]);
         $response->assertStatus(422);
 
         // nameが200文字を超える場合
         $str = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $name = substr(str_shuffle(str_repeat($str, 10)), 0, 201);
-        $response = $this->actingAs($this->authUser)->postJson($this->PATH, [ 'name' => $name ]);
+        $response = $this->actingAs($this->authUser)->postJson($this->PATH, ['name' => $name]);
         $response->assertStatus(422);
 
         /*** Auth::user()と$folder->userIdが一致しなければerror403 ***/
         $anotherUser = User::where('email', 'test@email.com')->first();
-        $response = $this->actingAs($anotherUser)->postJson($this->PATH, [ 'name' => 'new folder' ]);
+        $response = $this->actingAs($anotherUser)->postJson($this->PATH, ['name' => 'new folder']);
         $response->assertStatus(403);
     }
 
@@ -154,9 +154,9 @@ class ItemControllerTest extends TestCase
     public function test_authUser_can_update_an_item()
     {
         $item = $this->folder->items()->first();
-        $response = $this->actingAs($this->authUser)->putjson("{$this->PATH}/{$item->id}", [ 'name' => 'new item' ]);
+        $response = $this->actingAs($this->authUser)->putjson("{$this->PATH}/{$item->id}", ['name' => 'new item']);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('items', [ 'name' => 'new item' ]);
+        $this->assertDatabaseHas('items', ['name' => 'new item']);
     }
 
     // アイテム更新時
@@ -164,17 +164,17 @@ class ItemControllerTest extends TestCase
     // - itemが存在しなければ404
     // - requestにnameがない, もしくは""か200文字を超える場合error
     // - Auth::user()と$folder->userIdが一致しなければerror403
-    // - folderとitemのリレーションが不正であればerror404
+    // - folderとitemのリレーションが不正であればerror403
     public function test_check_error_in_update_item()
     {
         $item = $this->folder->items()->first();
 
         /*** folderが存在しなければerror404 ***/
-        $response = $this->actingAs($this->authUser)->putJson("/api/folders/100/items/{$item->id}", [ 'name' => 'new folder' ]);
+        $response = $this->actingAs($this->authUser)->putJson("/api/folders/100/items/{$item->id}", ['name' => 'new folder']);
         $response->assertStatus(404);
 
         /*** itemが存在しなければ404 ***/
-        $response = $this->actingAs($this->authUser)->putJson("/api/folders/100/items/100", [ 'name' => 'new folder' ]);
+        $response = $this->actingAs($this->authUser)->putJson("/api/folders/100/items/100", ['name' => 'new folder']);
         $response->assertStatus(404);
 
         /*** requestにnameがない, もしくは""か200文字を超える場合error ***/
@@ -183,27 +183,27 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(422);
 
         // name = ""の場合
-        $response = $this->actingAs($this->authUser)->putJson("{$this->PATH}/{$item->id}", [ 'name' => "" ]);
+        $response = $this->actingAs($this->authUser)->putJson("{$this->PATH}/{$item->id}", ['name' => ""]);
         $response->assertStatus(422);
 
         // nameが200文字を超える場合
         $str = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $name = substr(str_shuffle(str_repeat($str, 10)), 0, 201);
-        $response = $this->actingAs($this->authUser)->putJson("{$this->PATH}/{$item->id}", [ 'name' => $name ]);
+        $response = $this->actingAs($this->authUser)->putJson("{$this->PATH}/{$item->id}", ['name' => $name]);
         $response->assertStatus(422);
 
         /*** Auth::user()と$folder->userIdが一致しなければerror403 ***/
         $anotherUser = User::where('email', 'test@email.com')->first();
-        $response = $this->actingAs($anotherUser)->putJson("{$this->PATH}/{$item->id}", [ 'name' => 'new folder' ]);
+        $response = $this->actingAs($anotherUser)->putJson("{$this->PATH}/{$item->id}", ['name' => 'new folder']);
         $response->assertStatus(403);
 
-        /*** folderとitemのリレーションが不正であればerror404 ***/
+        /*** folderとitemのリレーションが不正であればerror403 ***/
         $item = $anotherUser->folders()->first()->items()->first();
-        $response = $this->actingAs($this->authUser)->putjson("{$this->PATH}/{$item->id}", [ 'name' => 'new item' ]);
-        $response->assertStatus(404);
+        $response = $this->actingAs($this->authUser)->putjson("{$this->PATH}/{$item->id}", ['name' => 'new item']);
+        $response->assertStatus(403);
     }
 
-        /*** アイテム削除に関するテスト ***/
+    /*** アイテム削除に関するテスト ***/
 
     // 認証済みユーザーはアイテムの削除が可能
     public function test_authUser_can_delete_an_item()
@@ -211,14 +211,14 @@ class ItemControllerTest extends TestCase
         $item = $this->folder->items()->first();
         $response = $this->actingAs($this->authUser)->deletejson("{$this->PATH}/{$item->id}");
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('items', [ 'name' => $item->name ]);
+        $this->assertDatabaseMissing('items', ['name' => $item->name]);
     }
 
     // アイテム削除時
     // - folderが存在しなければ404
     // - itemが存在しなければ404
     // - Auth::user()と$folder->userIdが一致しなければerror403
-    // - folderとitemのリレーションが不正であればerror404
+    // - folderとitemのリレーションが不正であればerror403
     public function test_check_error_in_delete_item()
     {
         $item = $this->folder->items()->first();
@@ -236,9 +236,36 @@ class ItemControllerTest extends TestCase
         $response = $this->actingAs($anotherUser)->deleteJson("{$this->PATH}/{$item->id}");
         $response->assertStatus(403);
 
-        /*** folderとitemのリレーションが不正であればerror404 ***/
+        /*** folderとitemのリレーションが不正であればerror403 ***/
         $item = $anotherUser->folders()->first()->items()->first();
         $response = $this->actingAs($this->authUser)->deletejson("{$this->PATH}/{$item->id}");
-        $response->assertStatus(404);
+        $response->assertStatus(403);
+    }
+
+    /**
+     * アイテムの詳細を取得することができることをテスト
+     */
+    public function test_success_show()
+    {
+        /** @var Folder $folder */
+        $folder = $this->authUser->folders()->first();
+        /** @var Item $item */
+        $item = $folder->items()->first();
+        $response = $this->actingAs($this->authUser)->getJson("api/folders/{$folder->id}/items/{$item->id}");
+        $response->assertStatus(200);
+        $this->assertEquals($item->toJson(), $response->content());
+    }
+
+    /**
+     * 他フォルダのアイテム詳細を取得することができないことをテスト
+     */
+    public function test_fail_access_item_for_the_other_folders()
+    {
+        /** @var Folder[] $folders */
+        $folders = $this->authUser->folders()->limit(2)->get();
+        /** @var Item $item */
+        $item = $folders[0]->items()->first();
+        $response = $this->actingAs($this->authUser)->getJson("api/folders/{$folders[1]->id}/items/{$item->id}");
+        $response->assertStatus(403);
     }
 }
