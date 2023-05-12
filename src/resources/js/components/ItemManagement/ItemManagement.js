@@ -15,7 +15,6 @@ import {NoticeContext} from '../common/Notification';
 
 // 特定のフォルダにに属するアイテムの管理画面
 // - 新しいアイテムの追加
-// - 既存アイテムの編集
 // - 既存アイテムの削除
 // - アイテムのフォルダ内検索 を実装
 const ItemManagement = ({folderId}) => {

@@ -14,6 +14,12 @@ import {grey} from "@mui/material/colors";
 import EditItem from "../ItemManagement/tool/EditItem";
 import Paper from "@mui/material/Paper";
 
+/**
+ * アイテムの詳細画面
+ * -特定のアイテムの編集
+ * -YouTubeAPIの実装
+ */
+
 const ItemDetailManagement = ({itemId, folderId}) => {
 
     const [name, setName] = useState();
