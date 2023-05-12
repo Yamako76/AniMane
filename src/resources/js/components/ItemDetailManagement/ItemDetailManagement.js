@@ -38,6 +38,7 @@ const ItemDetailManagement = ({itemId, folderId}) => {
         }
     }, [])
 
+    // Mountされた時点でアイテム読み込みを開始
     useEffect(() => {
         const getItem = async () => {
             const item = await fetchItem();

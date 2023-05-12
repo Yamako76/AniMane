@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import EditItemDialog from './EditItemDialog';
 import Button from "@mui/material/Button";
 
-// Objectの編集を行う画面を表するためのボタン
+// itemの編集を行う画面を表するためのボタン
 // ボタンを押すと編集画面を表示し
 // 再度, ボタンを押すと閉じる
 const EditItemButton = ({
