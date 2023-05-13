@@ -2,10 +2,6 @@ import React from "react";
 import Iframe from "react-iframe";
 import Box from "@mui/material/Box";
 
-/**
- * YouTubeを表示する画面
- */
-
 const ViewYouTubeVideo = ({videoId}) => {
 
     return (
