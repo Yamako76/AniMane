@@ -1,5 +1,6 @@
 # AniMane
-<https://animane-prot.net>
+
+アプリへのリンク: <https://animane-prot.net>
 
 ## 概要
 
