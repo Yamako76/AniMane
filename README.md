@@ -62,7 +62,7 @@
 ##### その他
 
 - Docker/Docker compose
-- Heroku
+- AWS
 - GitHub Actions
 
 ## 設計
