@@ -63,7 +63,6 @@
 
 - Docker/Docker compose
 - AWS
-- GitHub Actions
 
 ## 設計
 
